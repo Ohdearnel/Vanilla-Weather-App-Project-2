@@ -17,25 +17,41 @@
 
   <body>
     <div class="container">
-      <div class="weather-app">
-        <div class="row">
-          <h1>Cornwall</h1>
-          <ul>
-            <li>Saturday 10:00</li>
-            <li>Mostly Cloudy</li>
-          </ul>
-          <div class="col-6">
-            <img
-              src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
-              alt="Cloudy"
-            />
-            18°C | °F
-          </div>
-          <div class="col-6">
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <div class="overview">
+            <h1>Cornwall</h1>
             <ul>
-              <li>Humidity: 87%</li>
-              <li>Wind Speed: 7 mph</li>
+              <li>Saturday 10:00</li>
+              <li>Mostly Cloudy</li>
             </ul>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="d-flex weather-temperature">
+                <img
+                  src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+                  alt="Cloudy"
+                  id="icon"
+                  class="weather-icon"
+                />
+                <div>
+                  <strong id="temperature">18</strong
+                  ><span class="units"
+                    >°C |
+                    <a href="#" class="fahrenheit-link" id="fahrenheit-link"
+                      >°F</a
+                    ></span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <ul>
+                <li>Humidity: 87%</li>
+                <li>Wind Speed: 7 mph</li>
+              </ul>
+            </div>
           </div>
         </div>
         <footer>

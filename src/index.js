@@ -25,8 +25,20 @@ function formatDate(timestamp) {
 function displayConditions(response) {
   console.log(response);
   document.querySelector("#city").innerHTML = response.data.city;
+  document.querySelector("#dateTime").innerHTML = formatDate(
+    response.data.time * 1000
+  );
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
+
+  document
+    .querySelector("#icon")
+    .setAttribute("src", `${response.data.condition.icon_url}`);
+
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", `${response.data.condition.description}`);
+
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.temperature.current
   );
@@ -38,8 +50,6 @@ function displayConditions(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
-  let dateElement = document.querySelector("#dateTime");
-  dateElement.innerHTML = formatDate(response.data.time * 1000);
 }
 
 let city = `Manchester`;

@@ -24,9 +24,11 @@ function formatDate(timestamp) {
 
 function displayConditions(response) {
   document.querySelector("#city").innerHTML = response.data.city;
+
   document.querySelector("#dateTime").innerHTML = formatDate(
     response.data.time * 1000
   );
+
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
 
@@ -41,14 +43,19 @@ function displayConditions(response) {
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.temperature.current
   );
+
   document.querySelector("#feels-like").innerHTML = Math.round(
     response.data.temperature.feels_like
   );
+
   document.querySelector("#humidity").innerHTML =
     response.data.temperature.humidity;
+
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
+
+  celsiusTemperature = response.data.temperature.current;
 }
 
 function citySearch(city) {
@@ -63,7 +70,33 @@ function handleSubmit(event) {
   citySearch(cityInput.value);
 }
 
-citySearch("Manchester");
+function showFahrenheit(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  let fahrenheit = (celsiusTemperature * 9) / 5 + 32;
+
+  temperatureElement.innerHTML = Math.round(fahrenheit);
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsius);
+
+citySearch("Manchester");

@@ -7,7 +7,7 @@ h1 {
   display: block;
   font-size: 24px;
   font-weight: 100;
-  line-height: 29px;
+  line-height: 30px;
   margin-bottom: 0;
 }
 
@@ -51,16 +51,20 @@ li:first-letter {
 
 .weather-temperature strong {
   color: rbg(33, 33, 33);
-  font-size: 43px;
+  font-size: 55px;
   font-weight: 400;
 }
 
 .weather-temperature .units {
   position: relative;
   font-size: 16px;
-  top: -20px;
+  top: -30px;
 }
 
 .fahrenheit-link {
   text-decoration: none;
+}
+
+.conditions {
+  padding-top: 15px;
 }

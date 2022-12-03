@@ -60,3 +60,7 @@ li {
 .fahrenheit-link {
   text-decoration: none;
 }
+
+.description {
+  text-transform: capitalize;
+}

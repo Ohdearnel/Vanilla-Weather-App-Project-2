@@ -23,7 +23,6 @@ function formatDate(timestamp) {
 }
 
 function displayConditions(response) {
-  console.log(response);
   document.querySelector("#city").innerHTML = response.data.city;
   document.querySelector("#dateTime").innerHTML = formatDate(
     response.data.time * 1000
@@ -52,9 +51,19 @@ function displayConditions(response) {
   );
 }
 
-let city = `Manchester`;
+function citySearch(city) {
+  let apiKey = "f65b33ot2ea727d4e0e7bcb38f9d0783";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayConditions);
+}
 
-let apiKey = "f65b33ot2ea727d4e0e7bcb38f9d0783";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#search-input");
+  citySearch(cityInput.value);
+}
 
-axios.get(apiUrl).then(displayConditions);
+citySearch("Manchester");
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);

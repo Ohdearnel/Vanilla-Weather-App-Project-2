@@ -1,3 +1,27 @@
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let weekday = days[date.getDay()];
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${weekday} ${hours}:${minutes}`;
+}
+
 function displayConditions(response) {
   console.log(response);
   document.querySelector("#city").innerHTML = response.data.city;
@@ -14,9 +38,11 @@ function displayConditions(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
+  let dateElement = document.querySelector("#dateTime");
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
 }
 
-let city = `New York`;
+let city = `Manchester`;
 
 let apiKey = "f65b33ot2ea727d4e0e7bcb38f9d0783";
 let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;

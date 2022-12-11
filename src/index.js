@@ -22,7 +22,8 @@ function formatDate(timestamp) {
   return `${weekday} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -53,43 +54,44 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function getForecast(coordinates) {
+  let lat = coordinates.latitude;
+  let lon = coordinates.longitude;
+  let apiKey = `f65b33ot2ea727d4e0e7bcb38f9d0783`;
+  let forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+
+  axios.get(forecastApiUrl).then(displayForecast);
+}
+
 function displayConditions(response) {
   document.querySelector("#city").innerHTML = response.data.city;
-
   document.querySelector("#dateTime").innerHTML = formatDate(
     response.data.time * 1000
   );
-
   document.querySelector("#description").innerHTML =
     response.data.condition.description;
-
   document
     .querySelector("#icon")
     .setAttribute("src", `${response.data.condition.icon_url}`);
-
   document
     .querySelector("#icon")
     .setAttribute("alt", `${response.data.condition.description}`);
-
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.temperature.current
   );
-
   document.querySelector("#feels-like").innerHTML = `${Math.round(
     response.data.temperature.feels_like
   )}°C`;
-
   document.querySelector("#humidity").innerHTML =
     response.data.temperature.humidity;
-
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
 
-  displayForecast();
-
   celsiusTemperature = response.data.temperature.current;
   feelsLikeCelsius = response.data.temperature.feels_like;
+
+  getForecast(response.data.coordinates);
 }
 
 function citySearch(city) {

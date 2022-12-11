@@ -78,3 +78,22 @@ li:first-letter {
 .conditions {
   padding-top: 15px;
 }
+
+.weather-forecast {
+  margin-top: 15px;
+  text-align: center;
+  color: #898989;
+}
+
+.weather-forecast-date {
+  font-size: 16px;
+}
+
+.weather-forecast-temperature {
+  font-size: 12px;
+  color: black;
+}
+
+.weather-forecast-temperature-min {
+  color: #878787;
+}

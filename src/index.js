@@ -22,6 +22,37 @@ function formatDate(timestamp) {
   return `${weekday} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+              <div class="col-2">
+                <div class="weather-forecast-date">${day}</div>
+                <img
+                  src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+                  alt="Cloudy"
+                  id="forecast-icon"
+                  class="forecast-icon"
+                  width="40"
+                />
+                <div class="weather-forecast-temperature">
+                  <span class="weather-forecast-temperature-max">18°c</span
+                  ><strong> | </strong
+                  ><span class="weather-forecast-temperature-min">12°c</span>
+                </div>
+              </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayConditions(response) {
   document.querySelector("#city").innerHTML = response.data.city;
 
@@ -54,6 +85,8 @@ function displayConditions(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
+
+  displayForecast();
 
   celsiusTemperature = response.data.temperature.current;
   feelsLikeCelsius = response.data.temperature.feels_like;
